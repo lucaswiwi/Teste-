@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Código</title>
+    <style>
+        #questionContainer {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+        #noBtn, #yesBtn {
+            position: absolute;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #heartLoader, #resultContainer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="questionContainer">
+    <button id="noBtn">Não</button>
+    <button id="yesBtn">Sim</button>
+</div>
+
+<div id="heartLoader">Carregando...</div>
+<div id="resultContainer">
+    <p>Resultado: Você acertou!</p>
+</div>
+
+<video id="gifResult" src="resultado.gif" style="display:none;" autoplay></video>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const questionContainer = document.getElementById("questionContainer");
+    const heartLoader = document.getElementById("heartLoader");
+    const resultContainer = document.getElementById("resultContainer");
+    const gifResult = document.getElementById("gifResult");
+
+    noBtn.addEventListener("mouseover", () => {
+        const newX = Math.floor(Math.random() * questionContainer.offsetWidth);
+        const newY = Math.floor(Math.random() * questionContainer.offsetHeight);
+        noBtn.style.left = `${newX}px`;
+        noBtn.style.top = `${newY}px`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        const timeoutId = setTimeout(() => {
+            heartLoader.style.display = "none";
+            resultContainer.style.display = "inherit";
+            gifResult.style.display = "block";
+            gifResult.play();
+        }, 3000);
+    });
+</script>
+
+</body>
+</html>
